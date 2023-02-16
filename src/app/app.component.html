@@ -1,0 +1,30 @@
+<div>{{name +' '+ profession}}</div>
+
+<button (click)="handleClick()">{{counter}}</button>
+
+<ul [class]="'link-list'">
+  <ng-container *ngFor="let link of social_links; let idx = index">
+
+    <a *ngIf="link.isActive; else content">
+      {{link.title}}
+    </a>
+
+    <ng-template #content>
+      Not active
+    </ng-template>
+
+    <button (click)="removeLink(idx)"> Remove link </button>
+
+  </ng-container>
+</ul>
+
+
+<input #inputElem type='text' value='' (change)="onChange($event)" />
+<button type='button' (click)="saveQuote()">Save</button>
+
+<ol>
+  <li #quote *ngFor="let quote of quotes; let idx = index">
+    {{quote}}
+    <button (click)="removeQuote(idx)">Remove quote</button>
+  </li>
+</ol>
