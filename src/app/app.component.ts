@@ -1,10 +1,9 @@
-import { ReturnStatement } from '@angular/compiler';
 import { Component } from '@angular/core';
 
-interface ISocialLinks {
+interface ITodo {
+  done: Boolean;
   title: string;
-  link: string;
-  isActive: boolean;
+  forDeletion: Boolean;
 }
 
 @Component( {
@@ -13,41 +12,53 @@ interface ISocialLinks {
   styleUrls: [ './app.component.css' ]
 } )
 export class AppComponent {
-  counter = 0;
-  name = 'Víctor';
-  profession = 'Software Developer';
-  textColorClass = 'white green_bg';
-  linkStyle = 'underline';
-  currentQuote = '';
-
-  social_links: ISocialLinks[] = [
-    { title: 'Facebook', link: "https://facebook.com/SabujXiP", isActive: false },
-    { title: 'Twitter', link: "https://twitter.com/SabujXi", isActive: true },
-    { title: 'Github', link: "https://github.com/SabujXi", isActive: true },
+  todoArray: ITodo[] = [
+    { done: false, title: 'Go home', forDeletion: false },
+    { done: false, title: 'Feed bunny', forDeletion: false },
+    { done: false, title: 'Study programming', forDeletion: false },
   ];
 
-  quotes: string[] = [];
-
-  handleClick () {
-    this.counter++;
+  addTodo ( value: string ) {
+    this.todoArray.push( { done: false, title: value, forDeletion: false } );
   }
 
-  removeLink ( idx: number ) {
-    this.social_links.splice( idx, 1 );
+  toggleTodo ( idx: number ) {
+    this.todoArray[ idx ].done = !this.todoArray[ idx ].done;
   }
 
-  saveQuote () {
-    if ( !this.currentQuote ) return;
-
-    this.quotes.push( this.currentQuote );
+  markForDeletion ( idx: number ) {
+    this.todoArray[ idx ].forDeletion = true;
+    document.getElementById( 'delete-confirm' )!.style.display = 'block';
   }
 
-  removeQuote ( idx: number ) {
-    this.quotes.splice( idx, 1 );
+  restoreForDeletion () {
+    this.todoArray.forEach( todo => todo.forDeletion = false );
+    document.getElementById( 'delete-confirm' )!.style.display = 'none';
   }
 
-  onChange ( event: Event ) {
-    this.currentQuote = ( event.target as HTMLInputElement ).value;
-  };
+  deleteTodo () {
+    this.todoArray.forEach( ( todo, index ) => {
+      if ( todo.forDeletion === true ) this.todoArray.splice( index, 1 );
+    } );
+    document.getElementById( 'delete-confirm' )!.style.display = 'none';
+  }
+
+  toggleEditDisplay ( editContainer: HTMLDivElement ) {
+    if ( editContainer.style.display === 'none' )
+      editContainer.style.display = 'block';
+    else
+      editContainer.style.display = 'none';
+  }
+
+  editTodo ( inputEdit: HTMLInputElement, idx: number ) {
+    this.todoArray.splice( idx, 1,
+      { ...this.todoArray[ idx ], title: inputEdit.value }
+    );
+
+  }
+
+  clearTodos () {
+    this.todoArray.splice( 0 );
+  }
 
 }
