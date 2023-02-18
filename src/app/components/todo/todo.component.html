@@ -1,0 +1,26 @@
+<span *ngIf="!todo.done; else doneTodo">
+  {{idx + 1}}. {{ todo.title}}
+</span>
+
+<ng-template #doneTodo>
+  <span [ngStyle]="{'text-decoration': 'line-through'}">
+    {{idx + 1}}. {{ todo.title}}
+  </span>
+</ng-template>
+
+<button (click)="markAsDone(idx)">
+  {{
+  (todo.done)
+  ? 'Mark as undone'
+  :'Mark as done'
+  }}
+</button>
+
+<button (click)="markForDeletion(idx)">Delete todo</button>
+<button (click)="toggleEditDisplay(editContainer)">Edit</button>
+
+<div [ngStyle]="{'display':'none'}" #editContainer>
+  <input type="text" value={{todo.title}} #inputEdit>
+  <button (click)="editTodo(inputEdit, idx)">Confirm edit</button>
+</div>
+<br>

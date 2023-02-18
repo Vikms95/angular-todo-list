@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-
-interface ITodo {
-  done: Boolean;
-  title: string;
-  forDeletion: Boolean;
-}
+import { TodoService } from './services/todo.service';
+import { ITodo } from './interfaces';
 
 @Component( {
   selector: 'app',
@@ -12,49 +8,50 @@ interface ITodo {
   styleUrls: [ './app.component.css' ]
 } )
 export class AppComponent {
-  todoArray: ITodo[] = [
-    { done: false, title: 'Go home', forDeletion: false },
-    { done: false, title: 'Feed bunny', forDeletion: false },
-    { done: false, title: 'Study programming', forDeletion: false },
-  ];
-
-  addTodo ( value: string ) {
-    this.todoArray.push( { done: false, title: value, forDeletion: false } );
+  constructor ( private todoService: TodoService ) {
+    todoService
+      .getTodos()
+      .subscribe( data => this.todoArray = data );
   }
 
-  toggleTodo ( idx: number ) {
-    this.todoArray[ idx ].done = !this.todoArray[ idx ].done;
-  }
+  todoId = 3;
+  todoArray: ITodo[] = [];
 
-  markForDeletion ( idx: number ) {
-    this.todoArray[ idx ].forDeletion = true;
-    document.getElementById( 'delete-confirm' )!.style.display = 'block';
+
+  addTodo ( value: string, taskInput: HTMLInputElement ) {
+    const todo = {
+      id: this.todoId,
+      title: value,
+      done: false,
+      forDeletion: false
+    };
+
+    this.todoService.addTodo( todo ).subscribe( () =>
+      this.todoArray.push( todo )
+    );
+
+    this.todoId++;
+    taskInput.value = '';
   }
 
   restoreForDeletion () {
-    this.todoArray.forEach( todo => todo.forDeletion = false );
     document.getElementById( 'delete-confirm' )!.style.display = 'none';
+
+    this.todoArray.forEach( todo => todo.forDeletion = false );
+
   }
 
   deleteTodo () {
-    this.todoArray.forEach( ( todo, index ) => {
-      if ( todo.forDeletion === true ) this.todoArray.splice( index, 1 );
-    } );
     document.getElementById( 'delete-confirm' )!.style.display = 'none';
-  }
 
-  toggleEditDisplay ( editContainer: HTMLDivElement ) {
-    if ( editContainer.style.display === 'none' )
-      editContainer.style.display = 'block';
-    else
-      editContainer.style.display = 'none';
-  }
+    const todo = this.todoArray.find( todo => {
+      return todo.forDeletion === true ? todo : null;
+    } );
 
-  editTodo ( inputEdit: HTMLInputElement, idx: number ) {
-    this.todoArray.splice( idx, 1,
-      { ...this.todoArray[ idx ], title: inputEdit.value }
-    );
-
+    if ( todo ) this.todoService
+      .deleteTodo( todo )
+      .subscribe( () =>
+        this.todoArray = this.todoArray.filter( t => t.id !== todo.id ) );
   }
 
   clearTodos () {
