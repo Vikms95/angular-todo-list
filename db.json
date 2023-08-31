@@ -29,6 +29,12 @@
       "title": "App",
       "done": false,
       "forDeletion": false
+    },
+    {
+      "id": 0.3482766436716268,
+      "title": "duplicate",
+      "done": false,
+      "forDeletion": false
     }
   ]
 }
