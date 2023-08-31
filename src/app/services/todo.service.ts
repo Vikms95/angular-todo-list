@@ -20,14 +20,26 @@ export class TodoService {
   }
 
   markAsDone(todo: ITodo): Observable<ITodo> {
-    const url = this.url + todo.id;
+    const url = this.url + '/todo/done/' + todo.id;
+    const body = todo;
+
+    return this.http.put<ITodo>(url, body);
+  }
+
+  editTodo(todo: ITodo): Observable<ITodo> {
+    const url = this.url + '/todo/edit/' + todo.id;
     const body = todo;
 
     return this.http.put<ITodo>(url, body);
   }
 
   deleteTodo(todo: ITodo): Observable<ITodo> {
-    const url = this.url + todo.id;
+    const url = this.url + '/todo/' + todo.id;
+    return this.http.delete<ITodo>(url);
+  }
+
+  clearTodos(): Observable<ITodo> {
+    const url = this.url + '/todo';
     return this.http.delete<ITodo>(url);
   }
 }

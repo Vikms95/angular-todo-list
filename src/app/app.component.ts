@@ -10,9 +10,7 @@ import { ITodo } from './interfaces';
 export class AppComponent {
   constructor(private todoService: TodoService) {
     todoService.getTodos().subscribe((data) => {
-      console.log(data);
       this.todoArray = data;
-      console.log(this.todoArray);
     });
   }
 
@@ -27,10 +25,13 @@ export class AppComponent {
       forDeletion: false,
     };
 
-    this.todoService.addTodo(todo).subscribe(() => this.todoArray.push(todo));
+    this.todoService.addTodo(todo).subscribe((todo) => {
+      if (!todo) return;
 
-    this.todoId++;
-    taskInput.value = '';
+      this.todoId++;
+      taskInput.value = '';
+      this.todoArray.push(todo);
+    });
   }
 
   restoreForDeletion() {
@@ -56,6 +57,6 @@ export class AppComponent {
   }
 
   clearTodos() {
-    this.todoArray.splice(0);
+    this.todoService.clearTodos().subscribe(() => this.todoArray.splice(0));
   }
 }

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h1> To-Do Application </h1>
+      <h1>To-Do Application</h1>
     </div>
   </div>
 </div>
@@ -9,26 +9,30 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-8">
-      <input type="text" class="form-control" name="task" placeholder="Task"
-             #taskInput>
+      <input
+        type="text"
+        class="form-control"
+        name="task"
+        placeholder="Task"
+        #taskInput
+      />
     </div>
 
     <div class="col-xs-4">
-      <app-button text='Add' (click)='addTodo(taskInput.value, taskInput)'>
+      <app-button text="Add" (click)="addTodo(taskInput.value, taskInput)">
       </app-button>
     </div>
   </div>
 
-  <div id='delete-confirm' [style.display]="'none'">
+  <div id="delete-confirm" [style.display]="'none'">
     Do you want to delete this task ?
-    <app-button (click)=" deleteTodo()" text="Yes" />
+    <app-button (click)="deleteTodo()" text="Yes" />
     <app-button (click)="restoreForDeletion()" text="No" />
   </div>
 
   <div class="row">
     <div class="col-xs-12">
       <table class="table table-striped">
-
         <thead>
           <tr>
             <th>To-Do list</th>
@@ -36,9 +40,13 @@
         </thead>
 
         <tbody>
-          <app-todo *ngFor="let todo of todoArray; let idx = index"
-                    [todo]="todo" [idx]='idx' [todoArray]="todoArray">
-          </app-todo>
+          <todo
+            *ngFor="let todo of todoArray; let idx = index"
+            [todo]="todo"
+            [idx]="idx"
+            [todoArray]="todoArray"
+          >
+          </todo>
         </tbody>
 
         <tfoot>
@@ -46,7 +54,6 @@
             <app-button (click)="clearTodos()" text="Clear" />
           </tr>
         </tfoot>
-
       </table>
     </div>
   </div>
