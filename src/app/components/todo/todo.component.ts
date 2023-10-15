@@ -19,6 +19,10 @@ export class TodoComponent {
   //
   // should be cherry-picked
   // this too should be cherry-picked
+  // more cherries
+  // changes, a lot
+  // a lot a lot
+  // jejenjds
   //
 
   markAsDone(idx: number) {
