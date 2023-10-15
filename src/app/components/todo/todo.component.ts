@@ -18,6 +18,7 @@ export class TodoComponent {
   todoService;
   //
   // should be cherry-picked
+  // this too should be cherry-picked
   //
 
   markAsDone(idx: number) {
