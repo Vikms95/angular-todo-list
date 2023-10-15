@@ -12,13 +12,13 @@ export class TodoComponent {
     this.todoService = todoService;
   }
 
-  //
-  //
-  //
   @Input() todo!: ITodo;
   @Input() idx!: number;
   @Input() todoArray!: ITodo[];
   todoService;
+  //
+  // should be cherry-picked
+  //
 
   markAsDone(idx: number) {
     const todo = this.todoArray[idx];
