@@ -1,6 +1,6 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { TodoService } from '../../services/todo.service';
+import { Component, Input } from '@angular/core';
 import { ITodo } from 'src/app/interfaces';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'todo',
@@ -12,6 +12,9 @@ export class TodoComponent {
     this.todoService = todoService;
   }
 
+  //
+  //
+  //
   @Input() todo!: ITodo;
   @Input() idx!: number;
   @Input() todoArray!: ITodo[];
