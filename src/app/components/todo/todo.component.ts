@@ -18,10 +18,12 @@ export class TodoComponent {
   todoService;
   //
   // should be cherry-picked
+  // *troublesome change
   // this too should be cherry-picked
   // more cherries
   // changes, a lot
-  // a lot a lot
+  // *troublesome change
+  // *troublesome change
   // jejenjds
   // more change
   //
