@@ -16,12 +16,15 @@ export class TodoComponent {
   @Input() idx!: number;
   @Input() todoArray!: ITodo[];
   todoService;
-  // change to do stuff
   //
+  // should be cherry-picked
+  // this too should be cherry-picked
+  // more cherries
+  // changes, a lot
+  // a lot a lot
+  // jejenjds
+  // more change
   //
-  //
-  //
-  // *one more change
 
   markAsDone(idx: number) {
     const todo = this.todoArray[idx];
