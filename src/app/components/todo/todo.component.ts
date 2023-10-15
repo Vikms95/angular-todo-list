@@ -13,6 +13,8 @@ export class TodoComponent {
   }
 
   //
+  //
+  //
   @Input() todo!: ITodo;
   @Input() idx!: number;
   @Input() todoArray!: ITodo[];
