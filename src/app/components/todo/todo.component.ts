@@ -18,13 +18,6 @@ export class TodoComponent {
   todoService;
   //
   // should be cherry-picked
-  // this too should be cherry-picked
-  // cherry with changes
-  // more changes
-  // alot
-  // to change
-  // this conflicts?
-  // another change
   //
 
   markAsDone(idx: number) {
