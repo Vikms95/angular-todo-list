@@ -24,6 +24,7 @@ export class TodoComponent {
   // alot
   // to change
   // this conflicts?
+  // another change
   //
 
   markAsDone(idx: number) {
