@@ -17,13 +17,11 @@ export class TodoComponent {
   @Input() todoArray!: ITodo[];
   todoService;
   //
-  // should be cherry-picked
-  // this too should be cherry-picked
-  // more cherries
-  // changes, a lot
-  // a lot a lot
-  // jejenjds
+  // * in main it looks like this
   // more change
+  // *this is main
+  // more stuff
+  //
   //
 
   markAsDone(idx: number) {
